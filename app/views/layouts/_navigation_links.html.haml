@@ -1,0 +1,8 @@
+-if user_signed_in?
+  %li= link_to '订单管理', orders_path
+  -if current_user.try(:admin?)
+    %li= link_to '商品管理', products_path
+    %li= link_to '用户管理', users_path
+  %li= link_to '退出', destroy_user_session_path, :method=>'delete'
+-else
+  %li= link_to '登陆', new_user_session_path  

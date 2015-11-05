@@ -1,0 +1,23 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @product.name
+%p
+  %b Product type:
+  = @product.product_catalog.name
+%p
+  %b Model:
+  = @product.model
+%p
+  %b Unit:
+  = @product.unit
+%p
+  %b Customs code:
+  = @product.customs_code
+
+= link_to 'Edit', edit_product_path(@product)
+\|
+= link_to 'Back', products_path
+
+

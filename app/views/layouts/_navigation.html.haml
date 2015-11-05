@@ -1,5 +1,8 @@
--# navigation styled for Bootstrap 3.0
-%nav.navbar.navbar-default.navbar-fixed-top
+
+
+%header.navbar
+
+%nav.navbar.navbar-inverse.navbar-fixed-top{:role => "navigation"}
   .container
     .navbar-header
       %button.navbar-toggle{"data-target" => ".navbar-collapse", "data-toggle" => "collapse", :type => "button"}
@@ -7,7 +10,8 @@
         %span.icon-bar
         %span.icon-bar
         %span.icon-bar
-      = link_to 'Home', root_path, class: 'navbar-brand'
+      %a.navbar-brand{:href => "/"} 4UBest 推单管理系统
     .collapse.navbar-collapse
-      %ul.nav.navbar-nav
+      %ul.nav.navbar-nav.navbar-right
         = render 'layouts/navigation_links'
+

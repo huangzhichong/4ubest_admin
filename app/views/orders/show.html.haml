@@ -1,0 +1,36 @@
+%p#notice= notice
+
+%p
+  %b Order status:
+  = @order.order_status_id
+%p
+  %b Origin order number:
+  = @order.origin_order_number
+%p
+  %b Origin payment number:
+  = @order.origin_payment_number
+%p
+  %b Customer name:
+  = @order.customer_name
+%p
+  %b Phone:
+  = @order.phone
+%p
+  %b Id number:
+  = @order.id_number
+%p
+  %b Province:
+  = @order.province
+%p
+  %b City:
+  = @order.city
+%p
+  %b Street:
+  = @order.street
+%p
+  %b Zip code:
+  = @order.zip_code
+
+= link_to 'Edit', edit_order_path(@order)
+\|
+= link_to 'Back', orders_path

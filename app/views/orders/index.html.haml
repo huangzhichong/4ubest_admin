@@ -1,0 +1,36 @@
+%h1 订单列表
+
+%table.table.table-condensed.table-hover
+  %thead
+    %tr
+      %th 订单状态
+      %th 外部原始订单号
+      %th 外部原始支付单号
+      %th 收货人姓名
+      %th 联系电话
+      %th 身份证号码
+      %th 地址
+      %th 邮编
+      %th 运费
+      %th 订单总价      
+      %th
+
+  %tbody
+    - @orders.each do |order|
+      %tr
+        %td= order.order_status.status
+        %td= order.origin_order_number
+        %td= order.origin_payment_number
+        %td= order.customer_name
+        %td= order.phone
+        %td= order.id_number
+        %td= order.shipping_address
+        %td= order.zip_code        
+        %td= order.shipping_fee
+        %td= order.total_price
+        %td= link_to '编辑', edit_order_path(order)
+
+
+%br
+
+= link_to '创建订单', new_order_path, :class => "btn btn-primary active"
