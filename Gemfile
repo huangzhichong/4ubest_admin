@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 ruby '2.1.7'
 gem 'rails', '4.2.4'
-gem 'sqlite3'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
@@ -11,6 +10,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'china_city'
 
 group :development, :test do
+  gem 'sqlite3'
   gem 'byebug'
 end
 group :development do
@@ -30,5 +30,6 @@ group :development do
   gem 'rails_layout'
 end
 group :production do
+  gem 'pg'
   gem 'passenger'
 end
