@@ -1,24 +1,30 @@
-= simple_form_for(@order) do |f|
-  = f.error_notification
-
-  .form-inputs
-    = f.input :order_status_id
-    = f.input :origin_order_number
-    = f.input :origin_payment_number
-    = f.input :customer_name
-    = f.input :phone
-    = f.input :id_number
-    = f.input :province
-    = f.input :city
-    = f.input :street
-    = f.input :zip_code
-    %div.city-group
-      %select#province.city-select   
-        %option --省--
-        = options_for_select(ChinaCity.list)
-      %select#city.city-select
-        %option --市--
-
-
-  .form-actions
-    = f.button :submit
+.modal-dialog{:role => "document"}
+  .modal-content
+    .modal-header
+      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} &times;
+      %h4#myModalLabel.modal-titl= "添加 & 编辑商品"
+    .modal-body
+      = simple_form_for @order do |f|
+        = f.error_notification
+        .form-inputs
+          = f.association :order_status
+          = f.input :origin_order_number
+          = f.input :origin_payment_number
+          = f.input :customer_name
+          = f.input :phone
+          = f.input :id_number
+          = f.input :province
+          = f.input :city
+          = f.input :street
+          = f.input :zip_code
+          %div.city-group
+            %select#province.city-select   
+              %option --省--
+              = options_for_select(ChinaCity.list)
+            %select#city.city-select
+              %option --市--
+        .modal-footer
+          .form-actions
+            = f.button :submit, "保存", class: "btn btn-primary"
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

@@ -1,12 +1,21 @@
-= simple_form_for(@product) do |f|
-  = f.error_notification
+.modal-dialog{:role => "document"}
+  .modal-content
+    .modal-header
+      %button.close{"aria-label" => "Close", "data-dismiss" => "modal", :type => "button"}
+        %span{"aria-hidden" => "true"} &times;
+      %h4#myModalLabel.modal-titl= "添加 & 编辑商品"
+    .modal-body
+      = simple_form_for @product do |f|
+        = f.error_notification
+        .form-inputs
 
-  .form-inputs
-    = f.input :name
-    = f.association :product_catalog  
-    = f.input :model
-    = f.input :unit
-    = f.input :customs_code
+          = f.input :name, label: "名称"
+          = f.input :customs_code , label: "海关编码"
+          = f.association :product_catalog  , label: "商品类目"
+          = f.input :model, label: "规格"
+          = f.input :unit, label: "计量单位"
 
-  .form-actions
-    = f.button :submit
+        .modal-footer
+          .form-actions
+            = f.button :submit, "保存", class: "btn btn-primary"
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close

@@ -18,9 +18,9 @@
         %td= product.unit
         %td= product.customs_code        
         %td
-          = link_to '编辑', edit_product_path(product), :class => "btn btn-primary active"
+          = link_to '编辑', edit_product_path(product), :class => "btn btn-primary active", remote: true
           = link_to '删除', product, :method => :delete, :data => { :confirm => 'Are you sure?' } ,:class => "btn btn-danger active"
 
-= link_to '添加产品', new_product_path, :class => "btn btn-primary active"
-
+= link_to '添加产品', new_product_path, :class => "btn btn-primary active", remote: true
+#edit_product.modal.fade{"aria-labelledby" => "edit_product_modal", :role => "dialog", :tabindex => "-1"}
 

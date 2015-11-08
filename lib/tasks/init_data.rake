@@ -6,6 +6,7 @@ namespace :init do
     Product.delete_all
     OrderStatus.delete_all
     Order.delete_all
+    OrderProduct.delete_all
     User.delete_all
 
     # add user and admin user
@@ -53,7 +54,7 @@ namespace :init do
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("爱他美Aptamil - 1段"),
+      :product_id => Product.find_by_name("爱他美Aptamil - 1段").id,
       :custom_price => 180,
       :number => 2
     ).save
@@ -79,14 +80,14 @@ namespace :init do
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("爱他美Aptamil - 1段"),
+      :product_id => Product.find_by_name("爱他美Aptamil - 1段").id,
       :custom_price => 180,
       :number => 1
     ).save
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("爱他美Aptamil - 2段"),
+      :product_id => Product.find_by_name("爱他美Aptamil - 2段").id,
       :custom_price => 200,
       :number => 1
     ).save
@@ -113,14 +114,14 @@ namespace :init do
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("爱他美Aptamil - 1段"),
+      :product_id => Product.find_by_name("爱他美Aptamil - 1段").id,
       :custom_price => 180,
       :number => 1
     ).save
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("牛栏 Cow&Gate - 1段"),
+      :product_id => Product.find_by_name("牛栏 Cow&Gate - 1段").id,
       :custom_price => 200,
       :number => 1
     ).save
@@ -146,7 +147,7 @@ namespace :init do
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("爱他美Aptamil - 1段"),
+      :product_id => Product.find_by_name("爱他美Aptamil - 1段").id,
       :custom_price => 180,
       :number => 3
     ).save
@@ -171,21 +172,21 @@ namespace :init do
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("爱他美Aptamil - 1段"),
+      :product_id => Product.find_by_name("爱他美Aptamil - 1段").id,
       :custom_price => 180,
       :number => 1
     ).save
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("牛栏 Cow&Gate - 1段"),
+      :product_id => Product.find_by_name("牛栏 Cow&Gate - 1段").id,
       :custom_price => 180,
       :number => 1
     ).save
 
     OrderProduct.create(
       :order_id => order_id,
-      :product_id => Product.find_by_name("牛栏 Cow&Gate - 4段"),
+      :product_id => Product.find_by_name("牛栏 Cow&Gate - 4段").id,
       :custom_price => 180,
       :number => 1
     ).save

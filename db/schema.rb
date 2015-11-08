@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20151104101414) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "order_products", force: :cascade do |t|
     t.integer  "order_id"
     t.integer  "product_id"
@@ -87,7 +90,7 @@ ActiveRecord::Schema.define(version: 20151104101414) do
     t.integer  "role"
   end
 
-  add_index "users", ["email"], name: "index_users_on_email", unique: true
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
