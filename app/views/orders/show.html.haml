@@ -31,6 +31,22 @@
   %b Zip code:
   = @order.zip_code
 
+%table.table.table-condensed.table-hover
+  %thead
+    %tr
+      %th 名称
+      %th 数量
+      %th 报关价格
+
+  %tbody
+    - @order.order_products.each do |order_line|
+      %tr
+        %td= order_line.product.name
+        %td= order_line.number
+        %td= order_line.custom_price
+
+
+
 = link_to 'Edit', edit_order_path(@order)
 \|
 = link_to 'Back', orders_path

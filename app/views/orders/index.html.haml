@@ -28,8 +28,9 @@
         %td= order.zip_code        
         %td= order.shipping_fee
         %td= order.total_price        
-        %td= link_to '编辑', edit_order_path(order), :class => "btn btn-primary active", remote: true
-
+        %td
+          = link_to '详情', order_path(order), :class => "btn btn-primary active"
+          = link_to '编辑', edit_order_path(order), :class => "btn btn-primary active", remote: true
 %br
 = link_to '创建订单', new_order_path, :class => "btn btn-primary active", remote: true
 #edit_order.modal.fade{"aria-labelledby" => "edit_product_modal", :role => "dialog", :tabindex => "-1"}

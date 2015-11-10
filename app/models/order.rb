@@ -3,6 +3,10 @@ class Order < ActiveRecord::Base
   belongs_to :order_status
   has_many :order_products
 
+  accepts_nested_attributes_for :order_products,
+    :allow_destroy => true,
+    :reject_if     => :all_blank
+
   def shipping_address
     [self.province,self.city,self.street,self.zip_code].join
   end

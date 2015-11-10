@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require bootstrap-sprockets
 //= require 'china_city/jquery.china_city'
+//= require cocoon
 //= require_tree .
