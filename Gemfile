@@ -13,6 +13,7 @@ gem 'uuid'
 gem 'china_city'
 gem 'sidekiq'
 gem 'rest-client'
+
 group :development, :test do
   gem 'pry'
   gem 'byebug'
@@ -36,5 +37,5 @@ group :development do
   gem 'hirb'
 end
 group :production do
-  gem 'passenger'
+  gem 'thin'
 end
