@@ -10,7 +10,7 @@
   %body
     %header
       = render 'layouts/navigation'
-    / .container.bs-docs-container
-    %main{:role => "main"}
+    .container
       = render 'layouts/messages'
-      = yield
+      = yield      
+    = render 'layouts/footer'

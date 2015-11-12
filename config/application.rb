@@ -1,5 +1,6 @@
 require File.expand_path('../boot', __FILE__)
-
+require 'rexml/document'
+require 'base64'
 require 'rails/all'
 
 # Require the gems listed in Gemfile, including any gems

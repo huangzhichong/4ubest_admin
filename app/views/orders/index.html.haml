@@ -1,37 +1,52 @@
-%h1 订单列表
 
-%table.table.table-condensed.table-hover
-  %thead
-    %tr
-      %th 订单状态
-      %th 外部原始订单号
-      %th 外部原始支付单号
-      %th 收货人姓名
-      %th 联系电话
-      %th 身份证号码
-      %th 地址
-      %th 邮编
-      %th 运费
-      %th 订单总价      
-      %th
+.row
+  .col-lg-12
+    .page-header
+      .row
+        .col-lg-6
+          %h1#tables 订单列表
+        .col-lg-6
 
-  %tbody
-    - @orders.each do |order|
-      %tr
-        %td= order.order_status.status
-        %td= order.origin_order_number
-        %td= order.origin_payment_number
-        %td= order.customer_name
-        %td= order.phone
-        %td= order.id_number
-        %td= order.shipping_address
-        %td= order.zip_code        
-        %td= order.shipping_fee
-        %td= order.total_price        
-        %td
-          = link_to '详情', order_path(order), :class => "btn btn-primary active"
-          = link_to '编辑', edit_order_path(order), :class => "btn btn-primary active", remote: true
-%br
-= link_to '创建订单', new_order_path, :class => "btn btn-primary active", remote: true
+          #bs-example-navbar-collapse-2.collapse.navbar-collapse
+            %form.navbar-form.navbar-right{:role => "search"}
+              .form-group
+                %input.form-control{:placeholder => "Search", :type => "text"}
+              %button.btn.btn-default{:type => "submit"} Submit
+    .bs-component
+      %table.table.table-responsive.table-striped.table-hover
+        %thead
+          %tr
+            %th
+              .checkbox
+                %label
+                  %input#select_all{:type => "checkbox"}
+                    ="全选"
+            %th 外部原始订单号
+            %th 外部原始支付单号
+            %th 收货人姓名
+            %th 联系电话
+            %th 身份证号码
+            %th 地址
+            %th
+
+        %tbody
+          - @orders.each do |order|
+            %tr
+              %td
+                .checkbox
+                  %label
+                    %input{:type => "checkbox", :order_id => order.id}
+                      = order.order_status.status
+              %td= order.origin_order_number
+              %td= order.origin_payment_number
+              %td= order.customer_name
+              %td= order.phone
+              %td= order.id_number
+              %td= order.shipping_address              
+              %td
+                = link_to '详情', order_path(order), :class => "btn btn-primary active"
+                = link_to '编辑', edit_order_path(order), :class => "btn btn-primary active", remote: true
+      = link_to '创建订单', new_order_path, :class => "btn btn-primary active", remote: true
+
 #edit_order.modal.fade{"aria-labelledby" => "edit_product_modal", :role => "dialog", :tabindex => "-1"}
 

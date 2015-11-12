@@ -8,11 +8,13 @@ gem 'jquery-rails'
 gem 'jbuilder', '~> 2.0'
 gem 'pg'
 # for dynamic nested forms using jQuery
-gem "cocoon"
-
+gem 'cocoon'
+gem 'uuid'
 gem 'china_city'
-
+gem 'sidekiq'
+gem 'rest-client'
 group :development, :test do
+  gem 'pry'
   gem 'byebug'
 end
 group :development do
@@ -23,6 +25,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'haml-rails'
 gem 'simple_form'
+gem 'bootswatch-rails'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_21]

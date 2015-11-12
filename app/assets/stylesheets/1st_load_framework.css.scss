@@ -1,15 +1,12 @@
 // import the CSS framework
 @import "bootstrap-sprockets";
+@import "bootswatch/cyborg/variables";
 @import "bootstrap";
-
+@import "bootswatch/cyborg/bootswatch";
 // make all images responsive by default
 img {
   @extend .img-responsive;
   margin: 0 auto;
-  }
-// override for the 'Home' navigation link
-.navbar-brand {
-  font-size: inherit;
   }
 
 // THESE ARE EXAMPLES YOU CAN MODIFY
@@ -82,6 +79,12 @@ section {
 }
 
 body {
- background: image-url('greyzz.png') repeat 0 0;
-
- } 
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 12px;
+  line-height: 1.2;
+  color: #ebebeb;
+  background: image-url('grey_wash_wall.png') repeat 0 0;
+  //background: image-url('green_cup.png') repeat 0 0;
+  //background: image-url('old_moon.png') repeat 0 0;
+  //background: image-url('retina_wood.png') repeat 0 0;
+}

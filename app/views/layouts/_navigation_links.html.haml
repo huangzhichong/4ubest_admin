@@ -1,8 +1,19 @@
 -if user_signed_in?
-  %li= link_to '订单管理', orders_path
+  %li
+    %a{:href => orders_path}
+      %h5 订单管理
   -if current_user.try(:admin?)
-    %li= link_to '商品管理', products_path
-    %li= link_to '用户管理', users_path
-  %li= link_to '退出', destroy_user_session_path, :method=>'delete'
--else
-  %li= link_to '登陆', new_user_session_path  
+    %li
+      %a{:href => products_path}
+        %h5 商品管理
+    %li
+      %a{:href => users_path}
+        %h5 用户管理
+  %li    
+    %a{"data-method" => "delete", :href => destroy_user_session_path, :rel => "nofollow"}
+      %h5 退出
+
+-else  
+  %li
+    %a{:href => new_user_session_path}
+      %h5 登陆

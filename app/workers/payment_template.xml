@@ -1,0 +1,37 @@
+<DTC_Message>
+  <MessageHead>
+    <MessageType>PAYMENT_INFO</MessageType>
+    <MessageId>c9ff54a4-0372-4e66-bf79-be727318aa83 （自己填写ID）</MessageId>
+    <ActionType>1</ActionType>
+    <MessageTime>时间</MessageTime>
+    <SenderId>海关10位编码</SenderId>
+    <ReceiverId>CQITC</ReceiverId>
+    <SenderAddress/>
+    <ReceiverAddress/>
+    <PlatFormNo/>
+    <CustomCode/>
+    <SeqNo/>
+    <Note/>
+    <UserNo>海关10位编码</UserNo>
+    <Password>88e42280343934672d6dcd7ce15049de （密码加密后的字符串）</Password>
+  </MessageHead>
+  <MessageBody>
+    <DTCFlow>
+      <PAYMENT_INFO>
+        <CUSTOMS_CODE>关区代码</CUSTOMS_CODE>
+        <BIZ_TYPE_CODE>直购，网购代码</BIZ_TYPE_CODE>
+        <ESHOP_ENT_CODE>海关10位编码</ESHOP_ENT_CODE>
+        <ESHOP_ENT_NAME>企业名称</ESHOP_ENT_NAME>
+        <PAYMENT_ENT_CODE>海关10位编码</PAYMENT_ENT_CODE>
+        <PAYMENT_ENT_NAME>企业名称</PAYMENT_ENT_NAME>
+        <PAYMENT_NO>支付单编号</PAYMENT_NO>
+        <ORIGINAL_ORDER_NO>原始订单编号</ORIGINAL_ORDER_NO>
+        <PAY_AMOUNT>总额</PAY_AMOUNT>
+        <GOODS_FEE>商品货款金额</GOODS_FEE>
+        <TAX_FEE>税款金额</TAX_FEE>
+        <CURRENCY_CODE>支付币制</CURRENCY_CODE>
+        <MEMO/>
+      </PAYMENT_INFO>
+    </DTCFlow>
+  </MessageBody>
+</DTC_Message>
