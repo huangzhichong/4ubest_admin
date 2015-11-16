@@ -1,8 +1,8 @@
 // import the CSS framework
 @import "bootstrap-sprockets";
-@import "bootswatch/cyborg/variables";
+@import "bootswatch/superhero/variables";
 @import "bootstrap";
-@import "bootswatch/cyborg/bootswatch";
+@import "bootswatch/superhero/bootswatch";
 // make all images responsive by default
 img {
   @extend .img-responsive;
@@ -16,6 +16,15 @@ img {
   @extend .col-md-6;
   @extend .text-center;
   }
+.fix-width-label {
+  @extend .col-md-6;
+  width: 111px  
+  }
+.fix-width-label-input {
+  @extend .col-md-6;  
+  width: calc(100% - 111px);
+  }
+
 .form {
   @extend .col-md-6;
   }
@@ -82,8 +91,8 @@ body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 12px;
   line-height: 1.2;
-  color: #ebebeb;
-  background: image-url('grey_wash_wall.png') repeat 0 0;
+  //color: #ebebeb;
+  //background: image-url('grey_wash_wall.png') repeat 0 0;
   //background: image-url('green_cup.png') repeat 0 0;
   //background: image-url('old_moon.png') repeat 0 0;
   //background: image-url('retina_wood.png') repeat 0 0;

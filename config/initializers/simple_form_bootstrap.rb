@@ -132,6 +132,81 @@ SimpleForm.setup do |config|
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
     end
   end
+
+
+  1.upto(12) do |col|
+    config.wrappers "field#{col}".to_sym, tag: 'div', class: 'form-group', error_class: 'has-error' do |mdf|
+      mdf.use :html5
+      mdf.use :placeholder
+      mdf.optional :maxlength
+      mdf.optional :pattern
+      mdf.optional :min_max
+      mdf.optional :readonly
+      mdf.use :label, class: 'sr-only'
+
+      mdf.wrapper tag: 'div', class: "col-sm-#{col}" do |wr|
+        wr.use :input, class: 'form-control'
+        wr.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+        wr.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
+      end
+    end
+  end
+
+  1.upto(12) do |col|
+    config.wrappers "inline_field#{col}".to_sym, tag: 'div', class: "col-sm-#{col}", error_class: 'has-error' do |ic|
+      ic.use :html5
+      ic.use :placeholder
+      ic.use :label, class: 'sr-only'
+      ic.use :input, class: 'form-control'
+      ic.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      ic.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+
+    config.wrappers "inline_bool#{col}".to_sym, tag: 'div', class: "col-sm-#{col}", error_class: 'has-error' do |ib|
+      ib.use :html5
+      ib.optional :readonly
+
+      ib.wrapper tag: 'div', class: 'checkbox' do |ba|
+        ba.use :input
+        ba.use :label
+      end
+      ib.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      ib.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+    end
+  end
+
+
+  config.wrappers "fix_label_width".to_sym, tag: 'div', class: 'form-group', error_class: 'has-error' do |mdf|
+    mdf.use :html5
+    mdf.use :placeholder
+    mdf.optional :maxlength
+    mdf.optional :pattern
+    mdf.optional :min_max
+    mdf.optional :readonly
+
+    mdf.use :label, class: 'fix-width-label control-label'
+
+    mdf.wrapper tag: 'div', class: 'fix-width-label-input' do |wr|
+      wr.use :input, class: 'form-control'
+      wr.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      wr.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
+    end
+  end
+
+  config.wrappers "horizontal_form_button_group".to_sym, tag: 'div', class: 'form-group', error_class: 'has-error' do |mdf|
+    mdf.use :html5
+    mdf.wrapper tag: 'div' do |wr|
+      wr.wrapper tag: 'div', class: 'input-group col-sm-12' do |append|
+        append.use :input, class: 'form-control'
+      end
+      wr.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+      wr.use :hint, wrap_with: { tag: 'p', class: 'help-block' }
+
+    end
+  end
+
+
+
   # Wrappers for forms and inputs using the Bootstrap toolkit.
   # Check the Bootstrap docs (http://getbootstrap.com)
   # to learn about the different styles for forms and inputs,

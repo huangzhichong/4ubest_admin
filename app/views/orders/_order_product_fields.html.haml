@@ -1,5 +1,37 @@
-.nested-fields
-  = f.association :product
-  = f.input :number
-  = f.input :custom_price
-  = link_to_remove_association "remove task", f
+%tr.nested-fields  
+  %td 
+    = f.association :product, label: "商品"
+  %td.col-sm-2
+    =f.input :number, wrapper: :horizontal_form_button_group do
+      %span.input-group-btn
+        %button.btn.btn-white.btn-minuse{:type => "button"} -
+      = f.input_field :number, class: "form-control",:maxlength => "2", :type => "text", :value => "1"
+      %span.input-group-btn
+        %button.btn.btn-red.btn-pluss{:type => "button"} +
+  %td 
+    = f.input :custom_price , label: "价格"
+  %td
+    = link_to_remove_association "删除", f
+
+:javascript
+  
+  $('.btn-minuse').on('click',function(){
+    $input = $(this).parent().siblings('input[type="text"]');
+    $val = $input.val();
+    if(parseInt($val) > 0){
+      $input.val(parseInt($val)-1);
+    }
+    
+  });
+    
+   
+  $('.btn-pluss').on('click',function(){
+    $input = $(this).parent().siblings('input[type="text"]');
+    $val = $input.val();
+    if(parseInt($val) < 98){
+
+      $input.val(parseInt($val)+1);
+    }
+    
+  });
+    
