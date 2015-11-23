@@ -7,6 +7,20 @@ class Order < ActiveRecord::Base
   has_many :order_products
   before_save :default_values
 
+  validates :order_status_id, presence: true
+  validates :origin_order_number, presence: true
+  validates :origin_payment_number, presence: true
+  validates :customer_name, presence: true
+  validates :phone, presence: true
+  validates :id_number, presence: true
+  validates :province, presence: true
+  validates :city, presence: true
+  validates :street, presence: true
+  validates :zip_code, presence: true
+  validates :area, presence: true
+  validates :shipping_fee, presence: true
+
+  validates_associated :order_products
   accepts_nested_attributes_for :order_products,
     :allow_destroy => true,
     :reject_if     => :all_blank

@@ -26,6 +26,7 @@ gem 'bootstrap-sass'
 gem 'devise'
 gem 'haml-rails'
 gem 'simple_form'
+gem 'jquery-form-validator-rails'
 gem 'bootswatch-rails'
 group :development do
   gem 'better_errors'

@@ -32,7 +32,7 @@ class OrdersController < ApplicationController
         format.html { redirect_to orders_url, notice: 'Order was successfully created.' }
         format.json { render :show, status: :created, location: @order }
       else
-        format.html { render :new }
+        format.html { redirect_to orders_url, alert: 'Order was not created.' }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -46,7 +46,7 @@ class OrdersController < ApplicationController
         format.html { redirect_to orders_url, notice: 'Order was successfully updated.' }
         format.json { render :show, status: :ok, location: @order }
       else
-        format.html { render :edit }
+        format.html { redirect_to orders_url, alert: 'Order was not updated.' }
         format.json { render json: @order.errors, status: :unprocessable_entity }
       end
     end
@@ -61,6 +61,27 @@ class OrdersController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def is_origin_order_number_valid?
+    respond_to do |format|
+      unless Order.find_by_origin_order_number(params[:oo_id])
+        format.json { render plain: "true"}
+      else        
+        format.json { render plain: "false"}
+      end
+    end
+  end
+
+  def is_origin_payment_number_valid?
+    respond_to do |format|
+      unless Order.find_by_origin_payment_number(params[:op_id])
+        format.json { render plain: "true"}
+      else        
+        format.json { render plain: "false"}
+      end
+    end
+  end
+
 
   private
   # Use callbacks to share common setup or constraints between actions.

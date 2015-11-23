@@ -10,27 +10,30 @@
         .form-inputs
           .row
             .col-sm-6
-              = f.input :origin_order_number, label: "原始订单号"
-              = f.input :customer_name, label: "姓名"
-              = f.input :id_number, label: "身份证"
+              = f.input :origin_order_number, label: "原始订单号",required: true, input_html: {data: {:validation => "number, required,oo_validator","validation-error-msg" => "原始订单号必须为数字且不能重复"}}
             .col-sm-6           
-              = f.input :origin_payment_number, label: "原始支付单号"
-              = f.input :phone, label: "电话"
+              = f.input :origin_payment_number, label: "原始支付单号" , required: true,  input_html: {data: {:validation => "number, required, op_validator","validation-error-msg" => "原始支付单号必须为数字且不能重复"}}
+          .row
+            .col-sm-6
+              = f.input :customer_name, label: "姓名", required: true, input_html: {data: {:validation => "required","validation-error-msg" => "姓名不能为空"}}
+            .col-sm-6
+              = f.input :id_number, label: "身份证", required: true,  input_html: {data: {:validation => "custom, required","validation-regexp" => '(^\d{15}$)|(^\d{17}([0-9]|x|X)$)',"validation-error-msg" => "身份证号格式不正确"}}
+          .row
+            .col-sm-6
+              = f.input :phone, label: "手机号码", required: true, input_html: {data: {:validation => "custom, required","validation-regexp" => '(\d{11})',"validation-error-msg" => "手机号码必须为11位数字"}}            
 
           .row
             .col-sm-9
-              = f.input :street, label: "详细地址",wrapper: :fix_label_width
+              = f.input :street, label: "详细地址", required: true,wrapper: :fix_label_width, input_html: {data: {:validation => "required","validation-error-msg" => "详细地址不能为空"}}
             .col-sm-3    
-              = f.input :zip_code, label: "邮编"              
+              = f.input :zip_code, label: "邮编", required: true, input_html: {data: {:validation => "custom, required","validation-regexp" => '(\d{6})',"validation-error-msg" => "邮编必须为6位数字"}}
           .row
             .form-group
-              %label.optional.control-label{:style => "width: 111px; margin-right: 15px; float: left;"} 所在地区
+              %label.required.control-label{:style => "width: 111px; margin-right: 15px; float: left;"} 所在地区
               #city.col-sm-6
-                %select.prov.select.col-sm-6.optional.form-control{:style => "width: 30%;",:name=>"order[province]"}
-                %select.city.select.col-sm-6.optional.form-control{:disabled => "disabled",:style => "width: 30%;",:name=>"order[city]"}
-                %select.dist.select.col-sm-6.optional.form-control{:disabled => "disabled",:style => "width: 30%;",:name=>"order[area]"}          
-
-
+                %select.prov.select.col-sm-6.required.form-control{:style => "width: 30%;",:name=>"order[province]", "data-validation"=>"required","data-validation-error-msg" => "省市区不能为空"}
+                %select.city.select.col-sm-6.required.form-control{:disabled => "disabled",:style => "width: 30%;",:name=>"order[city]","data-validation"=>"required","data-validation-error-msg" => "省市区不能为空"}
+                %select.dist.select.col-sm-6.required.form-control{:disabled => "disabled",:style => "width: 30%;",:name=>"order[area]","data-validation"=>"required","data-validation-error-msg" => "省市区不能为空"}          
 
           .row
             = link_to_add_association f, :order_products,:"data-association-insertion-node" => "tbody#order_products", :"data-association-insertion-method" => "append", :partial => "order_product_fields", :class => "btn btn-primary" do
@@ -48,6 +51,101 @@
             %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} 关闭
 :javascript
 
+  $.formUtils.addValidator({
+    name : 'oo_validator',
+    validatorFunction : function(value, $el, config, language, $form) {
+      var result; 
+      $.ajax(
+        {
+            type: "POST",
+            url: "oo_unique.json",            
+            data: {"oo_id" : value},
+            async: false,
+            success: function(data)
+            {
+                if (data === 'true')
+                {
+                  result = true;
+                }
+                else
+                {
+                   result = false;
+                }
+            }
+        });
+      return result;  
+    },
+    errorMessage : '原始订单号必须为数字且不能重复',
+    errorMessageKey: 'badOONumber'
+  });
+
+  $.formUtils.addValidator({
+    name : 'op_validator',
+    validatorFunction : function(value, $el, config, language, $form) {
+      var result; 
+      $.ajax(
+        {
+            type: "POST",
+            url: "op_unique.json",            
+            data: {"op_id" : value},
+            async: false,
+            success: function(data)
+            {
+                if (data === 'true')
+                {
+                  result = true;
+                }
+                else
+                {
+                   result = false;
+                }
+            }
+        });
+      return result;  
+    },
+    errorMessage : '原始支付单号必须为数字且不能重复',
+    errorMessageKey: 'badOPNumber'
+  });
+
+  $.validate();
+
+  function number_minuse(e) {
+    console.log("minuse  ------- ");
+    $input = $(e).parent().next('input[type="text"]');
+    $val = $input.val();
+    if(parseInt($val) > 1){
+      $input.val(parseInt($val)-1);
+    }
+
+  };
+  function number_plus(e) {
+    console.log("plus    +++++++ ");
+    $input = $(e).parent().prev('input[type="text"]');
+    $val = $input.val();
+    if(parseInt($val) < 98){
+      $input.val(parseInt($val)+1);
+    }
+
+  };
+
+  $(function(){  
+    $('.btn-minuse').on('click',function(){
+      $input = $(this).parent().next('input[type="text"]');
+      $val = $input.val();
+      if(parseInt($val) > 1){
+        $input.val(parseInt($val)-1);
+      }      
+    });
+           
+    $('.btn-plus').on('click',function(){
+      $input = $(this).parent().prev('input[type="text"]');
+      $val = $input.val();
+      if(parseInt($val) < 98){
+        $input.val(parseInt($val)+1);
+      }
+      
+    });
+  });
   $("#city").citySelect({
     prov:"#{@order.province}",
     city:"#{@order.city}",
