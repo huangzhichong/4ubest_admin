@@ -5,9 +5,11 @@
         .col-lg-5            
           %p.bs-component
             = link_to '创建订单', new_order_path, :class => "btn btn-primary", remote: true              
-            %a.btn.btn-primary{:href => "#"} 导入订单
-            %a.btn.btn-primary{:href => "#"} 提交审核
-            %a.btn.btn-primary{:href => "#"} 推送海关
+            %button.btn.btn-primary.import_orders 导入订单
+            - if current_user.admin?
+              %button.btn.btn-primary.push_to_customs 推送海关
+            - else
+              %button.btn.btn-primary.push_to_review 提交审核
         .col-lg-7
           %form.navbar-form.navbar-right{:role => "search"}
             .form-group
@@ -36,8 +38,7 @@
                   %input.select_order{:type => "checkbox", :order_id => order.id}
                     = order.order_status.status
                 - else  
-                  %input.select_order{:type => "checkbox", :order_id => order.id, :disabled=>"disabled"}
-                    = order.order_status.status
+                  = order.order_status.status
 
               %td 
                 = order.origin_order_number
@@ -58,5 +59,33 @@
 
 #edit_order.modal.fade{"aria-labelledby" => "edit_product_modal", :role => "dialog", :tabindex => "-1"}
 
-  .col-lg-7
-    .col-lg-5
+
+
+
+:javascript
+
+  $(function(){
+    $("input#select_all").change(function() {
+      if(this.checked) {
+        $("input.select_order").prop('checked', $(this).prop("checked"));
+      } else {
+        $("input.select_order").prop('checked', $(this).prop("checked"));
+      }; 
+    });
+
+    $("button.push_to_review").click(function(){
+      var select_orders = $("input.select_order:checked").map(function(){return $(this).attr("order_id");}).get();
+      $.ajax(
+        {
+          type: "POST",
+          url: "orders/push_to_review.json",            
+          data: JSON.stringify({orders :  select_orders}),
+          dataType: 'json',
+          contentType: "application/json",
+          success: function(data)
+            {
+              location.reload();
+            }
+        });      
+    });
+  });

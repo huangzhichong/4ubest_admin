@@ -1,16 +1,19 @@
-%tr.nested-fields  
-  %td
-    = f.association :product, label: "商品"
-  %td.col-sm-2
+
+.nested-fields.row
+  .col-sm-5
+    = f.association :product, label: "选择商品", wrapper: :fix_label_width, input_html: {data: {:validation => "required","validation-error-msg" => "商品不能为空"}}
+  .col-sm-2    
     =f.input :number, wrapper: :horizontal_form_button_group do
       %span.input-group-btn
         %button.btn.btn-white.btn-minuse{:type => "button", :onclick=> "number_minuse(this)"} -
-      = f.input_field :number, class: "form-control",:maxlength => "2", :type => "text", :value => "1"
+      = f.input_field :number, class: "form-control",:maxlength => "2", :type => "text", :value => "1", "data-validation" => "number", "data-validation-error-msg" => "数量不正确"
       %span.input-group-btn
         %button.btn.btn-red.btn-plus{:type => "button", :onclick=> "number_plus(this)"} +
-  %td 
-    = f.input :custom_price , label: "价格"
-  %td
+  .col-sm-3
+    = f.input :custom_price , label: "价格",input_html: {data: {:validation => "number, required","validation-allowing" => 'float',"validation-error-msg" => "价格不能为空"}}
+  .col-sm-2
     = link_to_remove_association "删除", f
 
+
 :javascript
+  $.validate();

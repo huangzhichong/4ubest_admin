@@ -86,6 +86,10 @@ section {
   @extend .btn-primary;
   @extend .btn-xs;
 }
+.remove_fields{
+  @extend .btn;
+  @extend .btn-primary;  
+}
 
 body {
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;

@@ -20,8 +20,10 @@
               = f.input :id_number, label: "身份证", required: true,  input_html: {data: {:validation => "custom, required","validation-regexp" => '(^\d{15}$)|(^\d{17}([0-9]|x|X)$)',"validation-error-msg" => "身份证号格式不正确"}}
           .row
             .col-sm-6
-              = f.input :phone, label: "手机号码", required: true, input_html: {data: {:validation => "custom, required","validation-regexp" => '(\d{11})',"validation-error-msg" => "手机号码必须为11位数字"}}            
-
+              = f.input :phone, label: "手机号码", required: true, input_html: {data: {:validation => "custom, required","validation-regexp" => '(\d{11})',"validation-error-msg" => "手机号码必须为11位数字"}}
+          .row
+            .col-sm-6
+              = f.input :shipping_fee, label: "运费", required: true, input_html: {data: {:validation => "number, required","validation-allowing"=>"float","validation-error-msg" => "运费必须是数字，不能为空"}}
           .row
             .col-sm-9
               = f.input :street, label: "详细地址", required: true,wrapper: :fix_label_width, input_html: {data: {:validation => "required","validation-error-msg" => "详细地址不能为空"}}
@@ -34,6 +36,8 @@
                 %select.prov.select.col-sm-6.required.form-control{:style => "width: 30%;",:name=>"order[province]", "data-validation"=>"required","data-validation-error-msg" => "省市区不能为空"}
                 %select.city.select.col-sm-6.required.form-control{:disabled => "disabled",:style => "width: 30%;",:name=>"order[city]","data-validation"=>"required","data-validation-error-msg" => "省市区不能为空"}
                 %select.dist.select.col-sm-6.required.form-control{:disabled => "disabled",:style => "width: 30%;",:name=>"order[area]","data-validation"=>"required","data-validation-error-msg" => "省市区不能为空"}          
+
+
 
           .row
             = link_to_add_association f, :order_products,:"data-association-insertion-node" => "tbody#order_products", :"data-association-insertion-method" => "append", :partial => "order_product_fields", :class => "btn btn-primary" do
@@ -58,7 +62,7 @@
       $.ajax(
         {
             type: "POST",
-            url: "oo_unique.json",            
+            url: "/orders/oo_unique.json",            
             data: {"oo_id" : value},
             async: false,
             success: function(data)
@@ -86,7 +90,7 @@
       $.ajax(
         {
             type: "POST",
-            url: "op_unique.json",            
+            url: "/orders/op_unique.json",            
             data: {"op_id" : value},
             async: false,
             success: function(data)
@@ -129,6 +133,7 @@
   };
 
   $(function(){  
+  
     $('.btn-minuse').on('click',function(){
       $input = $(this).parent().next('input[type="text"]');
       $val = $input.val();
