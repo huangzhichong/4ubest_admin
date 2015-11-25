@@ -6,11 +6,15 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+
   def show
     @user = User.find(params[:id])
     unless current_user.admin?
       unless @user == current_user
-        redirect_to :back, :alert => "Access denied."
+        redirect_to root_path, :alert => "Access denied."
       end
     end
   end
@@ -34,7 +38,7 @@ class UsersController < ApplicationController
 
   def admin_only
     unless current_user.admin?
-      redirect_to :back, :alert => "Access denied."
+      redirect_to root_path, :alert => "Access denied."
     end
   end
 

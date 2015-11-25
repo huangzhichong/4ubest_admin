@@ -1,0 +1,14 @@
+%h3 用户管理
+%table.table.table-responsive.table-striped.table-hover
+  %tbody
+    - @users.each do |user|
+      %tr        
+        %td
+          = link_to user.email, user
+        %td
+          = simple_form_for (user) do |f|
+            = f.select(:role, User.roles.keys.map {|role| [role.titleize,role]})
+            = f.submit 'Change Role', :class => 'button-xs'
+        %td
+          = link_to("Delete user", user_path(user), :data => { :confirm => "Are you sure?" }, :method => :delete, :class => 'button-xs') unless user == current_user        
+          = link_to("编辑用户", edit_user_path(user))
